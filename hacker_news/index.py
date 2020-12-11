@@ -2,14 +2,24 @@ import requests
 from bs4 import BeautifulSoup
 import pprint
 # *********** HACKER NEWS *********** #
+current_page = 1
+pages_to_get = 2
 
-res = requests.get("https://news.ycombinator.com/")
-data = res.text
+mega_links = []
+mega_votes = []
 
-soup = BeautifulSoup(data, "html.parser")
+while (current_page <= pages_to_get):
+    res = requests.get(f"https://news.ycombinator.com/news?p={current_page}")
+    current_page += 1
+    data = res.text
 
-links = soup.select('.storylink')
-votes = soup.select(".score")
+    soup = BeautifulSoup(data, "html.parser")
+
+    links = soup.select('.storylink')
+    votes = soup.select(".score")
+
+    mega_links.extend(links)
+    mega_votes.extend(votes)
 
 
 def get_hacker_news_content(links, votes):
@@ -26,9 +36,11 @@ def get_hacker_news_content(links, votes):
     return posts
 
 
-posts = get_hacker_news_content(links, votes)
-# print(get_hacker_news_content(links, votes))
+posts = get_hacker_news_content(mega_links, mega_votes)
 
 # Sorting by votes descending
 sorted_posts = sorted(posts, key=lambda x: x.get('score'), reverse=True)
-pprint.pprint(sorted_posts)
+# pprint.pprint(sorted_posts)
+print("Sorted Posts", len(sorted_posts))
+print("Mega Votes", len(mega_votes))
+print("Mega Links", len(mega_links))

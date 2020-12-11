@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pprint
 # *********** HACKER NEWS *********** #
 current_page = 1
-pages_to_get = 2
+pages_to_get = 3
 
 mega_links = []
 mega_votes = []
@@ -40,7 +40,7 @@ posts = get_hacker_news_content(mega_links, mega_votes)
 
 # Sorting by votes descending
 sorted_posts = sorted(posts, key=lambda x: x.get('score'), reverse=True)
-# pprint.pprint(sorted_posts)
+pprint.pprint(sorted_posts)
 print("Sorted Posts", len(sorted_posts))
 print("Mega Votes", len(mega_votes))
 print("Mega Links", len(mega_links))

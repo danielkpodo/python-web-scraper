@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pprint
-# *********** HACKER NEWS *********** #
+
 current_page = 1
 pages_to_get = 3
 

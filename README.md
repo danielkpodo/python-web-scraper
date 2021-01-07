@@ -4,5 +4,5 @@
 
 ### Usage
 
-- Cd into any directory
+- Cd into any of the above listed directories
 - Run python scripts in terminal
